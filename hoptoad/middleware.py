@@ -8,8 +8,6 @@ from django.http import Http404
 from hoptoad import get_hoptoad_settings
 from hoptoad.api import htv2
 
-from celery.decorators import task
-
 logger = logging.getLogger(__name__)
 
 

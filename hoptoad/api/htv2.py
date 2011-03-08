@@ -9,7 +9,7 @@ from hoptoad import get_hoptoad_settings
 from hoptoad.api.htv1 import _parse_environment, _parse_request, _parse_session
 from hoptoad.api.htv1 import _parse_message
 
-from celery.decorators import task
+from django_ztask.decorators import task
 
 logger = logging.getLogger(__name__)
 
@@ -268,7 +268,7 @@ def _ride_the_toad(payload, timeout, use_ssl):
             # hoptoad is down
             logger.critical("Hoptoad is down! Can't send payload..discarding.")
 
-@task(queue='celery')
+@task()
 def report(payload, timeout):
     use_ssl = get_hoptoad_settings().get('HOPTOAD_USE_SSL', False)
     return _ride_the_toad(payload, timeout, use_ssl)
